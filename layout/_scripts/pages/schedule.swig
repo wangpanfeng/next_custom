@@ -1,4 +1,4 @@
-<script{{ pjax }}>
+<script>
 (function() {
   // Initialization
   var calendar = {
@@ -43,14 +43,10 @@
     FIELD_MAXRESULTS   + '=' + calendar.maxResults;
 
   fetchData();
-  var fetchDataTimer = setInterval(fetchData, 60000);
-  window.addEventListener('pjax:send', () => {
-    clearInterval(fetchDataTimer);
-  });
 
   function fetchData() {
+    setTimeout(fetchData, 60000);
     var eventList = document.querySelector('.event-list');
-    if (!eventList) return;
 
     fetch(request_url).then(response => {
       return response.json();
